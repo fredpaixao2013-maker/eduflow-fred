@@ -53,9 +53,6 @@
             box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
         }
 
-        .mode-toggle.professor { border-color: var(--primary); color: var(--primary); }
-        .mode-toggle.aluno { border-color: var(--success); color: var(--success); }
-
         .app-container {
             display: flex;
             min-height: 100vh;
@@ -130,75 +127,6 @@
             color: var(--primary);
         }
 
-        .nav-item i {
-            width: 20px;
-            text-align: center;
-        }
-
-        .class-list {
-            margin-top: 8px;
-        }
-
-        .class-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-bottom: 2px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .class-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .class-item:hover, .class-item.active {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-        }
-
-        .sidebar-footer {
-            padding: 20px;
-            border-top: 1px solid var(--border);
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: white;
-        }
-
-        .user-name {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .user-role {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
         .main-content {
             flex: 1;
             margin-left: 280px;
@@ -234,37 +162,11 @@
             font-size: 14px;
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-
-        .btn-sm {
-            padding: 8px 16px;
-            font-size: 12px;
-        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-secondary { background: var(--bg-hover); color: var(--text-primary); border: 1px solid var(--border); }
+        .btn-success { background: var(--success); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-sm { padding: 8px 16px; font-size: 12px; }
 
         .stats-grid {
             display: grid;
@@ -278,60 +180,10 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 20px;
-            transition: all 0.3s;
         }
 
-        .stat-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-        }
-
-        .stat-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 24px;
-        }
-
-        @media (max-width: 1024px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .main-content {
-                margin-left: 0;
-            }
-        }
+        .stat-value { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+        .stat-label { color: var(--text-secondary); font-size: 13px; }
 
         .section-card {
             background: var(--bg-card);
@@ -346,17 +198,9 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 12px;
         }
 
-        .section-title {
-            font-size: 18px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .section-title { font-size: 18px; font-weight: 700; }
 
         .activity-item {
             background: rgba(255, 255, 255, 0.03);
@@ -364,20 +208,7 @@
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 12px;
-            transition: all 0.3s;
             position: relative;
-        }
-
-        .activity-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--primary);
-        }
-
-        .activity-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 8px;
         }
 
         .activity-type {
@@ -386,63 +217,26 @@
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 8px;
         }
 
         .type-task { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
-        .type-material { background: rgba(16, 185, 129, 0.2); color: #34d399; }
         .type-exam { background: rgba(239, 68, 68, 0.2); color: #f87171; }
 
         .delete-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
             background: none;
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
             opacity: 0;
-            transition: all 0.2s;
         }
 
-        .activity-item:hover .delete-btn {
-            opacity: 1;
-        }
-
-        .delete-btn:hover {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-        }
-
-        .activity-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .activity-desc {
-            color: var(--text-secondary);
-            font-size: 13px;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-
-        .activity-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .deadline {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .deadline.urgent {
-            color: var(--danger);
-            font-weight: 600;
-        }
+        .activity-item:hover .delete-btn { opacity: 1; }
+        .delete-btn:hover { color: var(--danger); }
 
         .modal-overlay {
             position: fixed;
@@ -461,10 +255,7 @@
             padding: 20px;
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
 
         .modal {
             background: var(--bg-card);
@@ -478,9 +269,7 @@
             transition: all 0.3s;
         }
 
-        .modal-overlay.active .modal {
-            transform: scale(1);
-        }
+        .modal-overlay.active .modal { transform: scale(1); }
 
         .modal-header {
             padding: 20px 24px;
@@ -490,47 +279,10 @@
             align-items: center;
         }
 
-        .modal-title {
-            font-size: 18px;
-            font-weight: 700;
-        }
+        .modal-body { padding: 24px; overflow-y: auto; max-height: calc(90vh - 140px); }
 
-        .modal-close {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 20px;
-            cursor: pointer;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-close:hover {
-            background: var(--bg-hover);
-            color: var(--danger);
-        }
-
-        .modal-body {
-            padding: 24px;
-            overflow-y: auto;
-            max-height: calc(90vh - 140px);
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 13px;
-        }
-
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; }
         .form-input, .form-select, .form-textarea {
             width: 100%;
             padding: 10px 14px;
@@ -541,27 +293,8 @@
             font-size: 14px;
         }
 
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        @media (max-width: 640px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
+        .form-textarea { resize: vertical; min-height: 100px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
         .toast {
             position: fixed;
@@ -581,130 +314,60 @@
             z-index: 2000;
         }
 
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .toast.error .toast-icon { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
 
-        .toast-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
+        .empty-state i { font-size: 40px; margin-bottom: 12px; opacity: 0.5; }
 
-        .toast.error .toast-icon {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-secondary);
-        }
-
-        .empty-state i {
-            font-size: 40px;
-            margin-bottom: 12px;
-            opacity: 0.5;
-        }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .quick-btn {
-            background: var(--bg-card);
+        .turma-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: var(--text-primary);
+            margin-bottom: 12px;
         }
 
-        .quick-btn:hover {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.1);
-        }
-
-        .quick-btn i {
-            font-size: 20px;
-            margin-bottom: 6px;
-            display: block;
-            color: var(--primary);
-        }
-
-        .quick-btn span {
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .submission-item {
+        .turma-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .aluno-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-hover);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+        }
+
+        .login-container { max-width: 400px; margin: 100px auto; text-align: center; }
+        .login-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; }
+        .login-logo { width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 32px; color: white; }
+
+        .student-option {
             padding: 12px;
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            margin-bottom: 8px;
             border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
         }
 
-        .submission-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            color: white;
-            flex-shrink: 0;
-        }
+        .student-option:hover { background: rgba(99, 102, 241, 0.1); border-color: var(--primary); }
 
-        .submission-info {
-            flex: 1;
-        }
-
-        .submission-name {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .submission-activity {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        .submission-grade {
-            font-weight: 800;
-            font-size: 16px;
-            color: var(--success);
-        }
-
-        .student-view {
-            display: none;
-        }
-
-        .student-view.active {
-            display: block;
-        }
-
-        .teacher-view.hidden {
-            display: none;
-        }
+        .teacher-view { display: block; }
+        .student-view { display: none; }
+        .student-view.active { display: block; }
+        .teacher-view.hidden { display: none; }
 
         .activity-card {
             background: var(--bg-card);
@@ -712,33 +375,6 @@
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 16px;
-            transition: all 0.3s;
-        }
-
-        .activity-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .upload-area {
-            border: 2px dashed var(--border);
-            border-radius: 12px;
-            padding: 40px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 12px;
-        }
-
-        .upload-area:hover {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.05);
-        }
-
-        .upload-area i {
-            font-size: 32px;
-            color: var(--primary);
-            margin-bottom: 8px;
         }
 
         .entregue-badge {
@@ -765,125 +401,30 @@
             font-weight: 800;
         }
 
-        .turma-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .turma-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .turma-title {
-            font-weight: 700;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .aluno-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--bg-hover);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin: 4px;
-        }
-
-        .aluno-tag button {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 10px;
-        }
-
-        .aluno-tag button:hover {
-            color: var(--danger);
-        }
-
-        .login-container {
-            max-width: 400px;
-            margin: 100px auto;
-            text-align: center;
-        }
-
-        .login-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-        }
-
-        .login-logo {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 32px;
-            color: white;
-        }
-
-        .student-list {
-            max-height: 300px;
-            overflow-y: auto;
-            margin: 16px 0;
-        }
-
-        .student-option {
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: left;
-        }
-
-        .student-option:hover {
-            background: rgba(99, 102, 241, 0.1);
-            border-color: var(--primary);
-        }
-
-        /* Senha modal */
-        .password-hint {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 8px;
-            font-style: italic;
-        }
+        .class-color { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+        
+        .nav-item i { width: 20px; text-align: center; }
+        
+        .user-profile { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); }
+        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; }
+        
+        .sidebar-footer { padding: 20px; border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
 
     <!-- Toggle Mode -->
-    <div class="mode-toggle professor" id="modeToggle" onclick="verificarSenhaProfessor()">
-        <i class="fas fa-chalkboard-teacher"></i>
-        <span id="modeText">MODO PROFESSOR</span>
+    <div class="mode-toggle" id="modeToggle" onclick="toggleMode()" style="border-color: var(--success); color: var(--success);">
+        <i class="fas fa-user-graduate"></i>
+        <span id="modeText">MODO ALUNO</span>
     </div>
 
-    <div class="app-container" id="appContainer">
+    <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-running"></i>
-                    </div>
+                    <div class="logo-icon"><i class="fas fa-running"></i></div>
                     EduFlow
                 </div>
             </div>
@@ -920,17 +461,17 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content" id="mainContent">
+        <main class="main-content">
             
             <!-- VISÃO PROFESSOR -->
-            <div class="teacher-view" id="teacherView">
+            <div class="teacher-view hidden" id="teacherView">
                 
                 <!-- Dashboard -->
                 <div id="dashboard-section" class="section-content">
                     <div class="top-header">
                         <div>
                             <h1 class="page-title">Dashboard</h1>
-                            <p style="color: var(--text-secondary); margin-top: 4px;">Prof. Fred Paixão e Silva • Educação Física</p>
+                            <p style="color: var(--text-secondary); margin-top: 4px;">Modo Professor - Fred Paixão e Silva</p>
                         </div>
                         <div style="display: flex; gap: 12px;">
                             <button class="btn btn-secondary" onclick="exportData()">
@@ -944,52 +485,31 @@
 
                     <div class="section-card" style="background: rgba(99, 102, 241, 0.1); border-color: var(--primary);">
                         <h3 style="margin-bottom: 16px; color: var(--primary);">
-                            <i class="fas fa-info-circle"></i> Como sincronizar para todos os alunos verem
+                            <i class="fas fa-shield-alt"></i> Modo Professor Ativo
                         </h3>
-                        <ol style="color: var(--text-secondary); line-height: 2; margin-left: 20px; font-size: 14px;">
-                            <li><strong>Cadastre todas as turmas e atividades</strong> neste computador</li>
-                            <li>Clique em <strong>"Exportar Dados"</strong> (botão acima) → salve o arquivo JSON</li>
-                            <li>Me envie esse arquivo JSON ou guarde em local seguro</li>
-                            <li>Quando precisar atualizar o site, me avise que eu atualizo com os novos dados</li>
-                            <li>Assim todos os alunos verão as mesmas turmas e atividades!</li>
-                        </ol>
-                        <p style="margin-top: 16px; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; font-size: 13px;">
-                            <i class="fas fa-lock"></i> <strong>Segurança:</strong> O modo Professor agora está protegido por senha. Os alunos só conseguem acessar o modo Aluno.
+                        <p style="color: var(--text-secondary); line-height: 1.6;">
+                            Você tem acesso completo para criar turmas, atividades e corrigir entregas. 
+                            Clique em "MODO ALUNO" no topo para ver como os alunos visualizam o sistema.
                         </p>
                     </div>
 
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="stat-header">
-                                <div>
-                                    <div class="stat-value" id="statTurmas">0</div>
-                                    <div class="stat-label">Turmas</div>
-                                </div>
-                                <div class="stat-icon"><i class="fas fa-chalkboard"></i></div>
-                            </div>
+                            <div class="stat-value" id="statTurmas">0</div>
+                            <div class="stat-label">Turmas</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-header">
-                                <div>
-                                    <div class="stat-value" id="statAlunos">0</div>
-                                    <div class="stat-label">Alunos</div>
-                                </div>
-                                <div class="stat-icon" style="background: rgba(236, 72, 153, 0.1); color: var(--secondary);"><i class="fas fa-users"></i></div>
-                            </div>
+                            <div class="stat-value" id="statAlunos">0</div>
+                            <div class="stat-label">Alunos</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-header">
-                                <div>
-                                    <div class="stat-value" id="statActivities">0</div>
-                                    <div class="stat-label">Atividades</div>
-                                </div>
-                                <div class="stat-icon"><i class="fas fa-running"></i></div>
-                            </div>
+                            <div class="stat-value" id="statActivities">0</div>
+                            <div class="stat-label">Atividades</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Gerenciamento de Turmas -->
+                <!-- Turmas -->
                 <div id="classes-section" class="section-content" style="display: none;">
                     <div class="top-header">
                         <h1 class="page-title">Turmas e Alunos</h1>
@@ -997,12 +517,10 @@
                             <i class="fas fa-plus"></i> Nova Turma
                         </button>
                     </div>
-
                     <div id="turmas-list"></div>
                     <div class="empty-state" id="emptyTurmas">
                         <i class="fas fa-school"></i>
                         <h3>Nenhuma turma cadastrada</h3>
-                        <p>Clique em "Nova Turma" para começar</p>
                     </div>
                 </div>
 
@@ -1011,4 +529,625 @@
                     <div class="top-header">
                         <h1 class="page-title">Atividades</h1>
                         <button class="btn btn-primary" onclick="openModal('activityModal')">
-                            <i class="fas f
+                            <i class="fas fa-plus"></i> Nova Atividade
+                        </button>
+                    </div>
+                    <div id="activities-list"></div>
+                    <div class="empty-state" id="emptyActivities" style="display: none;">
+                        <i class="fas fa-inbox"></i>
+                        <h3>Nenhuma atividade</h3>
+                    </div>
+                </div>
+
+                <!-- Correções -->
+                <div id="submissions-section" class="section-content" style="display: none;">
+                    <div class="top-header">
+                        <h1 class="page-title">Correções</h1>
+                    </div>
+                    <div id="submissions-list"></div>
+                    <div class="empty-state" id="emptySubmissions">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>Nenhuma entrega</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISÃO ALUNO -->
+            <div class="student-view active" id="studentView">
+                <div class="login-container" id="student-login">
+                    <div class="login-box">
+                        <div class="login-logo"><i class="fas fa-running"></i></div>
+                        <h2 style="margin-bottom: 8px;">Portal do Aluno</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 24px;">Selecione sua turma</p>
+                        <div id="student-turmas-list"></div>
+                    </div>
+                </div>
+
+                <div id="student-dashboard" style="display: none;">
+                    <div class="top-header">
+                        <div>
+                            <h1 class="page-title">Minhas Atividades</h1>
+                            <p style="color: var(--text-secondary); margin-top: 4px;" id="student-name-display">Aluno</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="logoutStudent()">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </button>
+                    </div>
+                    <div id="student-activities-list"></div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modal Senha -->
+    <div class="modal-overlay" id="senhaModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-lock"></i> Acesso Restrito</h2>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p style="margin-bottom: 20px; color: var(--text-secondary);">Digite a senha de professor para continuar:</p>
+                <div class="form-group">
+                    <input type="password" class="form-input" id="senhaInput" placeholder="Senha" style="text-align: center; font-size: 18px;">
+                </div>
+                <p style="font-size: 12px; color: var(--text-secondary); margin-top: 12px;">
+                    <i class="fas fa-info-circle"></i> Dica: fred2024
+                </p>
+                <div style="display: flex; gap: 12px; margin-top: 24px;">
+                    <button class="btn btn-secondary" onclick="closeModal('senhaModal')" style="flex: 1;">Cancelar</button>
+                    <button class="btn btn-primary" onclick="verificarSenha()" style="flex: 1;">Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nova Turma -->
+    <div class="modal-overlay" id="turmaModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Nova Turma</h2>
+                <button class="btn btn-sm btn-secondary" onclick="closeModal('turmaModal')" style="padding: 4px 12px;"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="createTurma(event)">
+                    <div class="form-group">
+                        <label class="form-label">Nome da Turma *</label>
+                        <input type="text" class="form-input" name="nome" placeholder="Ex: 1º Ano A" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Alunos (um por linha)</label>
+                        <textarea class="form-textarea" name="alunos" rows="8" placeholder="João Silva&#10;Maria Santos&#10;Pedro Costa"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Cadastrar Turma</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nova Atividade -->
+    <div class="modal-overlay" id="activityModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Nova Atividade</h2>
+                <button class="btn btn-sm btn-secondary" onclick="closeModal('activityModal')" style="padding: 4px 12px;"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="createActivity(event)">
+                    <div class="form-group">
+                        <label class="form-label">Título *</label>
+                        <input type="text" class="form-input" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Descrição</label>
+                        <textarea class="form-textarea" name="description"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Turma *</label>
+                            <select class="form-select" name="class" id="classSelect" required>
+                                <option value="">Selecione...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tipo</label>
+                            <select class="form-select" name="type">
+                                <option value="task">Prática</option>
+                                <option value="exam">Avaliação</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Data de Entrega *</label>
+                            <input type="datetime-local" class="form-input" name="deadline" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pontos</label>
+                            <input type="number" class="form-input" name="points" value="10">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Criar Atividade</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div>
+            <div style="font-weight: 700;" id="toast-title">Sucesso</div>
+            <div style="font-size: 13px; color: var(--text-secondary);" id="toast-message">Operação realizada</div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO - SENHA DO PROFESSOR
+        const SENHA_PROFESSOR = 'fred2024';
+        
+        let turmas = [];
+        let atividades = [];
+        let entregas = [];
+        let alunoAtual = null;
+        let turmaAtual = null;
+        let modoAtual = 'aluno';
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarDados();
+            atualizarInterface();
+            
+            // Preencher select de turmas
+            const select = document.getElementById('classSelect');
+            if (select) {
+                turmas.forEach(t => {
+                    select.innerHTML += `<option value="${t.id}">${t.nome}</option>`;
+                });
+            }
+        });
+
+        function carregarDados() {
+            const dados = localStorage.getItem('eduflow_dados');
+            if (dados) {
+                const parsed = JSON.parse(dados);
+                turmas = parsed.turmas || [];
+                atividades = parsed.atividades || [];
+                entregas = parsed.entregas || [];
+            }
+        }
+
+        function salvarDados() {
+            localStorage.setItem('eduflow_dados', JSON.stringify({ turmas, atividades, entregas }));
+            atualizarEstatisticas();
+        }
+
+        function exportData() {
+            const dados = { turmas, atividades, entregas };
+            const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `eduflow_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            mostrarToast('Backup criado', 'Envie esse arquivo para sincronizar');
+        }
+
+        // Alternar Modos
+        function toggleMode() {
+            if (modoAtual === 'aluno') {
+                // Tentar entrar como professor
+                openModal('senhaModal');
+                document.getElementById('senhaInput').value = '';
+                document.getElementById('senhaInput').focus();
+            } else {
+                // Voltar para modo aluno
+                modoAtual = 'aluno';
+                document.getElementById('teacherView').classList.add('hidden');
+                document.getElementById('studentView').classList.add('active');
+                document.getElementById('sidebar').style.display = 'none';
+                document.getElementById('mainContent').style.marginLeft = '0';
+                document.getElementById('modeToggle').innerHTML = '<i class="fas fa-user-graduate"></i><span>MODO ALUNO</span>';
+                document.getElementById('modeToggle').style.borderColor = 'var(--success)';
+                document.getElementById('modeToggle').style.color = 'var(--success)';
+                renderizarTurmasAluno();
+            }
+        }
+
+        function verificarSenha() {
+            const input = document.getElementById('senhaInput').value;
+            if (input === SENHA_PROFESSOR) {
+                closeModal('senhaModal');
+                modoAtual = 'professor';
+                
+                // Mostrar interface professor
+                document.getElementById('teacherView').classList.remove('hidden');
+                document.getElementById('studentView').classList.remove('active');
+                document.getElementById('sidebar').style.display = 'flex';
+                document.getElementById('mainContent').style.marginLeft = '280px';
+                document.getElementById('modeToggle').innerHTML = '<i class="fas fa-chalkboard-teacher"></i><span>MODO PROFESSOR</span>';
+                document.getElementById('modeToggle').style.borderColor = 'var(--primary)';
+                document.getElementById('modeToggle').style.color = 'var(--primary)';
+                
+                atualizarInterface();
+                mostrarToast('Bem-vindo, Professor!', 'Acesso liberado');
+            } else {
+                mostrarToast('Senha incorreta', 'Tente novamente', 'error');
+                document.getElementById('senhaInput').value = '';
+            }
+        }
+
+        // CRUD Turmas
+        function createTurma(event) {
+            event.preventDefault();
+            const form = event.target;
+            const nome = form.nome.value;
+            const alunosTexto = form.alunos.value.split('\n').filter(n => n.trim());
+            
+            const novaTurma = {
+                id: Date.now().toString(),
+                nome: nome,
+                alunos: alunosTexto.map((nome, idx) => ({
+                    id: idx,
+                    nome: nome.trim(),
+                    iniciais: nome.trim().split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
+                }))
+            };
+            
+            turmas.push(novaTurma);
+            salvarDados();
+            closeModal('turmaModal');
+            form.reset();
+            mostrarToast('Turma criada', `${novaTurma.nome} com ${novaTurma.alunos.length} alunos`);
+            atualizarInterface();
+            
+            // Atualizar select
+            const select = document.getElementById('classSelect');
+            select.innerHTML = '<option value="">Selecione...</option>';
+            turmas.forEach(t => {
+                select.innerHTML += `<option value="${t.id}">${t.nome}</option>`;
+            });
+        }
+
+        function deleteTurma(id) {
+            if (confirm('Excluir esta turma e todos os seus dados?')) {
+                turmas = turmas.filter(t => t.id !== id);
+                atividades = atividades.filter(a => a.turmaId !== id);
+                salvarDados();
+                atualizarInterface();
+                mostrarToast('Turma excluída');
+            }
+        }
+
+        // CRUD Atividades
+        function createActivity(event) {
+            event.preventDefault();
+            const form = event.target;
+            const turma = turmas.find(t => t.id === form.class.value);
+            
+            const novaAtividade = {
+                id: Date.now(),
+                titulo: form.title.value,
+                descricao: form.description.value,
+                tipo: form.type.value,
+                turmaId: form.class.value,
+                turmaNome: turma ? turma.nome : '',
+                deadline: form.deadline.value,
+                pontos: form.points.value,
+                criadaEm: new Date().toISOString()
+            };
+            
+            atividades.push(novaAtividade);
+            salvarDados();
+            closeModal('activityModal');
+            form.reset();
+            mostrarToast('Atividade criada', `Publicada em ${turma.nome}`);
+            atualizarInterface();
+        }
+
+        function deleteActivity(id) {
+            if (confirm('Excluir esta atividade?')) {
+                atividades = atividades.filter(a => a.id !== id);
+                entregas = entregas.filter(e => e.atividadeId !== id);
+                salvarDados();
+                atualizarInterface();
+                mostrarToast('Atividade excluída');
+            }
+        }
+
+        // Interface Professor
+        function atualizarInterface() {
+            // Turmas
+            const containerTurmas = document.getElementById('turmas-list');
+            const emptyTurmas = document.getElementById('emptyTurmas');
+            if (turmas.length === 0) {
+                if (emptyTurmas) emptyTurmas.style.display = 'block';
+                if (containerTurmas) containerTurmas.innerHTML = '';
+            } else {
+                if (emptyTurmas) emptyTurmas.style.display = 'none';
+                if (containerTurmas) {
+                    containerTurmas.innerHTML = turmas.map(t => `
+                        <div class="turma-card">
+                            <div class="turma-header">
+                                <div style="font-weight: 700; font-size: 16px;">
+                                    <span class="class-color" style="background: var(--primary);"></span>
+                                    ${t.nome} (${t.alunos.length} alunos)
+                                </div>
+                                <button class="btn btn-sm btn-danger" onclick="deleteTurma('${t.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                ${t.alunos.map(a => `
+                                    <span class="aluno-tag">${a.nome}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+            
+            // Atividades
+            const containerAtiv = document.getElementById('activities-list');
+            const emptyAtiv = document.getElementById('emptyActivities');
+            if (atividades.length === 0) {
+                if (emptyAtiv) emptyAtiv.style.display = 'block';
+                if (containerAtiv) containerAtiv.innerHTML = '';
+            } else {
+                if (emptyAtiv) emptyAtiv.style.display = 'none';
+                if (containerAtiv) {
+                    containerAtiv.innerHTML = atividades.map(a => {
+                        const turma = turmas.find(t => t.id === a.turmaId);
+                        return `
+                            <div class="activity-item">
+                                <button class="delete-btn" onclick="deleteActivity(${a.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <span class="activity-type ${a.tipo === 'exam' ? 'type-exam' : 'type-task'}">
+                                    ${a.tipo === 'exam' ? 'Avaliação' : 'Prática'}
+                                </span>
+                                <div style="font-size: 12px; color: var(--primary); margin-bottom: 4px;">
+                                    ${turma ? turma.nome : 'Turma'}
+                                </div>
+                                <div style="font-weight: 700; margin-bottom: 4px;">${a.titulo}</div>
+                                <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">${a.descricao || ''}</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">
+                                    <i class="fas fa-clock"></i> ${new Date(a.deadline).toLocaleString('pt-BR')} | 
+                                    <i class="fas fa-star"></i> ${a.pontos} pts
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            }
+            
+            atualizarEstatisticas();
+        }
+
+        function atualizarEstatisticas() {
+            const elTurmas = document.getElementById('statTurmas');
+            const elAlunos = document.getElementById('statAlunos');
+            const elAtiv = document.getElementById('statActivities');
+            
+            if (elTurmas) elTurmas.textContent = turmas.length;
+            if (elAlunos) elAlunos.textContent = turmas.reduce((acc, t) => acc + t.alunos.length, 0);
+            if (elAtiv) elAtiv.textContent = atividades.length;
+        }
+
+        // Interface Aluno
+        function renderizarTurmasAluno() {
+            const container = document.getElementById('student-turmas-list');
+            if (!container) return;
+            
+            if (turmas.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary);">Nenhuma turma disponível</p>';
+                return;
+            }
+            
+            container.innerHTML = turmas.map(t => `
+                <div class="student-option" onclick="selecionarTurma('${t.id}')">
+                    <div style="font-weight: 700;">${t.nome}</div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">${t.alunos.length} alunos</div>
+                </div>
+            `).join('');
+        }
+
+        function selecionarTurma(turmaId) {
+            turmaAtual = turmas.find(t => t.id === turmaId);
+            if (!turmaAtual) return;
+            
+            // Mostrar lista de alunos
+            const loginDiv = document.getElementById('student-login');
+            const dashboardDiv = document.getElementById('student-dashboard');
+            
+            if (loginDiv) {
+                loginDiv.innerHTML = `
+                    <div class="login-box">
+                        <button class="btn btn-sm btn-secondary" onclick="voltarParaTurmas()" style="margin-bottom: 16px; width: 100%;">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <h3 style="margin-bottom: 16px;">${turmaAtual.nome}</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 16px;">Clique no seu nome:</p>
+                        <div style="max-height: 400px; overflow-y: auto;">
+                            ${turmaAtual.alunos.map(a => `
+                                <div class="student-option" onclick="loginAluno(${a.id})">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 12px;">
+                                            ${a.iniciais}
+                                        </div>
+                                        <div style="font-weight: 600;">${a.nome}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function voltarParaTurmas() {
+            renderizarTurmasAluno();
+            document.getElementById('student-login').innerHTML = `
+                <div class="login-box">
+                    <div class="login-logo"><i class="fas fa-running"></i></div>
+                    <h2 style="margin-bottom: 8px;">Portal do Aluno</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 24px;">Selecione sua turma</p>
+                    <div id="student-turmas-list"></div>
+                </div>
+            `;
+            renderizarTurmasAluno();
+        }
+
+        function loginAluno(alunoId) {
+            alunoAtual = turmaAtual.alunos.find(a => a.id === alunoId);
+            if (!alunoAtual) return;
+            
+            document.getElementById('student-login').style.display = 'none';
+            document.getElementById('student-dashboard').style.display = 'block';
+            document.getElementById('student-name-display').textContent = `${alunoAtual.nome} • ${turmaAtual.nome}`;
+            
+            renderizarAtividadesAluno();
+        }
+
+        function logoutStudent() {
+            alunoAtual = null;
+            turmaAtual = null;
+            document.getElementById('student-dashboard').style.display = 'none';
+            document.getElementById('student-login').style.display = 'block';
+            voltarParaTurmas();
+        }
+
+        function renderizarAtividadesAluno() {
+            const container = document.getElementById('student-activities-list');
+            if (!container || !turmaAtual) return;
+            
+            const atividadesTurma = atividades.filter(a => a.turmaId === turmaAtual.id);
+            
+            if (atividadesTurma.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h3>Nenhuma atividade</h3>
+                        <p>Professor ainda não publicou atividades</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = atividadesTurma.map(a => {
+                const entregue = entregas.find(e => e.atividadeId === a.id && e.alunoId === alunoAtual.id);
+                const nota = entregue ? entregue.nota : null;
+                
+                return `
+                    <div class="activity-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+                            <div>
+                                <span class="activity-type ${a.tipo === 'exam' ? 'type-exam' : 'type-task'}">
+                                    ${a.tipo === 'exam' ? 'Avaliação' : 'Prática'}
+                                </span>
+                                <h3 style="margin: 8px 0 4px;">${a.titulo}</h3>
+                                <p style="color: var(--text-secondary); font-size: 13px;">${a.descricao || ''}</p>
+                            </div>
+                            ${nota !== null ? `<div class="nota-badge">${nota}</div>` : 
+                              entregue ? `<div class="entregue-badge"><i class="fas fa-check"></i> Entregue</div>` : ''}
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
+                            <i class="fas fa-clock"></i> Até ${new Date(a.deadline).toLocaleString('pt-BR')}
+                        </div>
+                        ${!entregue ? `
+                            <button class="btn btn-primary" style="width: 100%;" onclick="entregarAtividade(${a.id})">
+                                <i class="fas fa-upload"></i> Entregar Atividade
+                            </button>
+                        ` : nota !== null ? `
+                            <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; font-size: 13px;">
+                                <strong>Nota:</strong> ${nota}/${a.pontos}
+                            </div>
+                        ` : `
+                            <div style="text-align: center; color: var(--text-secondary); font-size: 13px;">
+                                <i class="fas fa-hourglass-half"></i> Aguardando correção
+                            </div>
+                        `}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function entregarAtividade(atividadeId) {
+            // Simulação de entrega
+            if (confirm('Confirma o envio desta atividade?\n\nNa versão online, aqui o aluno anexaria o arquivo.')) {
+                entregas.push({
+                    id: Date.now(),
+                    atividadeId: atividadeId,
+                    alunoId: alunoAtual.id,
+                    turmaId: turmaAtual.id,
+                    data: new Date().toISOString(),
+                    nota: null
+                });
+                salvarDados();
+                mostrarToast('Entregue!', 'Atividade enviada com sucesso');
+                renderizarAtividadesAluno();
+            }
+        }
+
+        // Navegação
+        function showSection(section) {
+            document.querySelectorAll('.section-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            
+            const target = document.getElementById(section + '-section');
+            if (target) target.style.display = 'block';
+            
+            if (event && event.target) {
+                event.target.closest('.nav-item').classList.add('active');
+            }
+        }
+
+        // Modais
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('active');
+        }
+
+        function mostrarToast(titulo, mensagem, tipo = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = toast.querySelector('.toast-icon');
+            
+            document.getElementById('toast-title').textContent = titulo;
+            document.getElementById('toast-message').textContent = mensagem;
+            
+            if (tipo === 'error') {
+                toast.classList.add('error');
+                icon.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+            } else {
+                toast.classList.remove('error');
+                icon.innerHTML = '<i class="fas fa-check"></i>';
+            }
+            
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Verificar senha ao pressionar Enter
+        document.addEventListener('DOMContentLoaded', function() {
+            const senhaInput = document.getElementById('senhaInput');
+            if (senhaInput) {
+                senhaInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') verificarSenha();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
