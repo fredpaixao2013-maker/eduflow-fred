@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFlow - Fred Paixão</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 3000;
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            padding: 8px 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .mode-toggle.professor { border-color: var(--primary); color: var(--primary); }
+        .mode-toggle.aluno { border-color: var(--success); color: var(--success); }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-section {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 4px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .class-list {
+            margin-top: 8px;
+        }
+
+        .class-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .class-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .class-item:hover, .class-item.active {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .user-role {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 80px 32px 24px;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .section-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .activity-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .activity-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 8px;
+        }
+
+        .activity-type {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .type-task { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+        .type-material { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .type-exam { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: all 0.2s;
+        }
+
+        .activity-item:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .activity-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .activity-desc {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .activity-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .deadline {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .deadline.urgent {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 20px;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: var(--bg-hover);
+            color: var(--danger);
+        }
+
+        .modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            max-height: calc(90vh - 140px);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .toast.error .toast-icon {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 40px;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .quick-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-primary);
+        }
+
+        .quick-btn:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .quick-btn i {
+            font-size: 20px;
+            margin-bottom: 6px;
+            display: block;
+            color: var(--primary);
+        }
+
+        .quick-btn span {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .submission-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .submission-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .submission-info {
+            flex: 1;
+        }
+
+        .submission-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .submission-activity {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .submission-grade {
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--success);
+        }
+
+        .student-view {
+            display: none;
+        }
+
+        .student-view.active {
+            display: block;
+        }
+
+        .teacher-view.hidden {
+            display: none;
+        }
+
+        .activity-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .activity-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 12px;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .upload-area i {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .entregue-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .nota-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        /* Gerenciamento de Turmas e Alunos */
+        .turma-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .turma-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .turma-title {
+            font-weight: 700;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .aluno-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-hover);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+        }
+
+        .aluno-tag button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .aluno-tag button:hover {
+            color: var(--danger);
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        .login-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+            color: white;
+        }
+
+        .student-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 16px 0;
+        }
+
+        .student-option {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .student-option:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .tab.active {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toggle Mode -->
+    <div class="mode-toggle professor" id="modeToggle" onclick="toggleMode()">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <span id="modeText">MODO PROFESSOR</span>
+    </div>
+
+    <div class="app-container" id="appContainer">
+        <!-- Sidebar (só aparece no modo professor) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    EduFlow
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-title">Menu</div>
+                <div class="nav-item active" onclick="showSection('dashboard')">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="nav-item" onclick="showSection('activities')">
+                    <i class="fas fa-tasks"></i>
+                    <span>Atividades</span>
+                </div>
+                <div class="nav-item" onclick="showSection('classes')">
+                    <i class="fas fa-users"></i>
+                    <span>Turmas e Alunos</span>
+                </div>
+                <div class="nav-item" onclick="showSection('submissions')">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Correções</span>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">FP</div>
+                    <div>
+                        <div class="user-name">Fred Paixão e Silva</div>
+                        <div class="user-role">Educação Física</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            
+            <!-- VISÃO PROFESSOR -->
+            <div class="teacher-view" id="teacherView">
+                
+                <!-- Dashboard -->
+                <div id="dashboard-section" class="section-content">
+                    <div class="top-header">
+                        <div>
+                            <h1 class="page-title">Dashboard</h1>
+                            <p style="color: var(--text-secondary); margin-top: 4px;">Prof. Fred Paixão e Silva • Educação Física</p>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="btn btn-secondary" onclick="exportData()">
+                                <i class="fas fa-download"></i> Backup
+                            </button>
+                            <button class="btn btn-primary" onclick="openModal('activityModal')">
+                                <i class="fas fa-plus"></i> Nova Atividade
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="statTurmas">0</div>
+                                    <div class="stat-label">Turmas</div>
+                                </div>
+                                <div class="stat-icon"><i class="fas fa-chalkboard"></i></div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="statAlunos">0</div>
+                                    <div class="stat-label">Alunos</div>
+                                </div>
+                                <div class="stat-icon" style="background: rgba(236, 72, 153, 0.1); color: var(--secondary);"><i class="fas fa-users"></i></div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div>
+                                    <div class="stat-value" id="statActivities">0</div>
+                                    <div class="stat-label">Atividades</div>
+                                </div>
+                                <div class="stat-icon"><i class="fas fa-running"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-card">
+                        <h3 style="margin-bottom: 16px;">📋 Como usar o sistema</h3>
+                        <ol style="color: var(--text-secondary); line-height: 2; margin-left: 20px;">
+                            <li>Clique em <strong>"Turmas e Alunos"</strong> no menu para cadastrar suas 10 turmas</li>
+                            <li>Adicione os alunos em cada turma (um por linha)</li>
+                            <li>Crie atividades específicas para cada turma</li>
+                            <li>Clique no botão <strong>"MODO PROFESSOR"</strong> no topo para ver como o aluno acessa</li>
+                            <li>Para colocar online: salve este arquivo e suba no GitHub (te explico depois)</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Gerenciamento de Turmas -->
+                <div id="classes-section" class="section-content" style="display: none;">
+                    <div class="top-header">
+                        <h1 class="page-title">Turmas e Alunos</h1>
+                        <button class="btn btn-primary" onclick="openModal('turmaModal')">
+                            <i class="fas fa-plus"></i> Nova Turma
+                        </button>
+                    </div>
+
+                    <div id="turmas-list">
+                        <!-- Lista de turmas será populada aqui -->
+                    </div>
+                    
+                    <div class="empty-state" id="emptyTurmas">
+                        <i class="fas fa-school"></i>
+                        <h3>Nenhuma turma cadastrada</h3>
+                        <p>Clique em "Nova Turma" para começar</p>
+                    </div>
+                </div>
+
+                <!-- Atividades -->
+                <div id="activities-section" class="section-content" style="display: none;">
+                    <div class="top-header">
+                        <h1 class="page-title">Atividades</h1>
+                        <button class="btn btn-primary" onclick="openModal('activityModal')">
+                            <i class="fas fa-plus"></i> Nova Atividade
+                        </button>
+                    </div>
+
+                    <div class="section-card">
+                        <div id="activities-list"></div>
+                        <div class="empty-state" id="emptyActivities" style="display: none;">
+                            <i class="fas fa-inbox"></i>
+                            <h3>Nenhuma atividade</h3>
+                            <p>Crie atividades para suas turmas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submissions -->
+                <div id="submissions-section" class="section-content" style="display: none;">
+                    <div class="top-header">
+                        <h1 class="page-title">Correções</h1>
+                    </div>
+                    <div class="section-card">
+                        <div id="submissions-list"></div>
+                        <div class="empty-state" id="emptySubmissions">
+                            <i class="fas fa-clipboard-list"></i>
+                            <h3>Nenhuma entrega</h3>
+                            <p>As entregas dos alunos aparecerão aqui</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISÃO ALUNO (LOGIN) -->
+            <div class="student-view" id="studentView" style="display: none;">
+                
+                <!-- Tela de Seleção de Turma -->
+                <div id="student-select-turma" class="login-container">
+                    <div class="login-box">
+                        <div class="login-logo">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h2 style="margin-bottom: 8px;">Portal do Aluno</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 24px;">Selecione sua turma</p>
+                        
+                        <div id="student-turmas-list" style="text-align: left;">
+                            <!-- Turmas serão listadas aqui -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tela de Seleção de Aluno -->
+                <div id="student-select-aluno" class="login-container" style="display: none;">
+                    <div class="login-box">
+                        <button class="btn btn-sm btn-secondary" onclick="voltarSelecaoTurma()" style="margin-bottom: 16px;">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        
+                        <h2 style="margin-bottom: 8px;" id="nomeTurmaSelecionada">Turma</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 24px;">Clique no seu nome</p>
+                        
+                        <div class="student-list" id="student-alunos-list">
+                            <!-- Alunos serão listados aqui -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard do Aluno -->
+                <div id="student-dashboard" style="display: none;">
+                    <div class="top-header">
+                        <div>
+                            <h1 class="page-title">Minhas Atividades</h1>
+                            <p style="color: var(--text-secondary); margin-top: 4px;" id="studentNameDisplay">Aluno</p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="logoutStudent()">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </button>
+                    </div>
+
+                    <div id="student-activities-container"></div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modal Nova Turma -->
+    <div class="modal-overlay" id="turmaModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Nova Turma</h2>
+                <button class="modal-close" onclick="closeModal('turmaModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="turmaForm" onsubmit="createTurma(event)">
+                    <div class="form-group">
+                        <label class="form-label">Nome da Turma *</label>
+                        <input type="text" class="form-input" name="nome" placeholder="Ex: 1º Ano A" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Cor</label>
+                        <select class="form-select" name="cor">
+                            <option value="#6366f1">Roxo</option>
+                            <option value="#ec4899">Rosa</option>
+                            <option value="#06b6d4">Ciano</option>
+                            <option value="#f59e0b">Laranja</option>
+                            <option value="#10b981">Verde</option>
+                            <option value="#8b5cf6">Violeta</option>
+                            <option value="#ef4444">Vermelho</option>
+                            <option value="#3b82f6">Azul</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Alunos (um por linha)</label>
+                        <textarea class="form-textarea" name="alunos" rows="10" placeholder="João Silva&#10;Maria Santos&#10;Pedro Costa&#10;..."></textarea>
+                        <small style="color: var(--text-secondary);">Cole a lista de alunos aqui, um nome por linha</small>
+                    </div>
+                    <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('turmaModal')">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Cadastrar Turma</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nova Atividade -->
+    <div class="modal-overlay" id="activityModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Nova Atividade</h2>
+                <button class="modal-close" onclick="closeModal('activityModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="activityForm" onsubmit="createActivity(event)">
+                    <div class="form-group">
+                        <label class="form-label">Título *</label>
+                        <input type="text" class="form-input" name="title" placeholder="Ex: Teste de Flexibilidade" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Descrição</label>
+                        <textarea class="form-textarea" name="description" placeholder="Instruções da atividade..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Turma *</label>
+                            <select class="form-select" name="class" required id="classSelect">
+                                <option value="">Selecione...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tipo</label>
+                            <select class="form-select" name="type">
+                                <option value="task">Prática</option>
+                                <option value="exam">Avaliação</option>
+                                <option value="material">Material</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Data de Entrega *</label>
+                            <input type="datetime-local" class="form-input" name="deadline" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pontos</label>
+                            <input type="number" class="form-input" name="points" value="10" min="0">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('activityModal')">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Criar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Entrega -->
+    <div class="modal-overlay" id="submitModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Entregar Atividade</h2>
+                <button class="modal-close" onclick="closeModal('submitModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div style="background: rgba(255,255,255,0.03); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                    <div style="font-weight: 700;" id="submitActivityTitle">Atividade</div>
+                    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Prazo: <span id="submitActivityDeadline">--</span></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Comentário</label>
+                    <textarea class="form-textarea" id="studentComment" placeholder="Escreva algo sobre sua entrega..."></textarea>
+                </div>
+
+                <div class="upload-area" onclick="simulateUpload()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <div style="font-weight: 600; margin-bottom: 4px;">Anexar arquivo</div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">Vídeo, foto ou PDF</div>
+                </div>
+
+                <div id="uploadStatus" style="display: none; margin-top: 12px; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; color: var(--success); font-size: 13px;">
+                    <i class="fas fa-check-circle"></i> Arquivo anexado
+                </div>
+
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button class="btn btn-secondary" onclick="closeModal('submitModal')">Cancelar</button>
+                    <button class="btn btn-success" onclick="confirmSubmission()">
+                        <i class="fas fa-paper-plane"></i> Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div>
+            <div style="font-weight: 700;" id="toast-title">Sucesso</div>
+            <div style="font-size: 13px; color: var(--text-secondary);" id="toast-message">Operação realizada</div>
+        </div>
+    </div>
+
+    <script>
+        // Dados
+        let turmas = [];
+        let atividades = [];
+        let entregas = [];
+        let alunoAtual = null;
+        let turmaAtual = null;
+        let atividadeParaEntregar = null;
+
+        // Cores disponíveis
+        const cores = [
+            { nome: 'Roxo', valor: '#6366f1' },
+            { nome: 'Rosa', valor: '#ec4899' },
+            { nome: 'Ciano', valor: '#06b6d4' },
+            { nome: 'Laranja', valor: '#f59e0b' },
+            { nome: 'Verde', valor: '#10b981' },
+            { nome: 'Violeta', valor: '#8b5cf6' },
+            { nome: 'Vermelho', valor: '#ef4444' },
+            { nome: 'Azul', valor: '#3b82f6' }
+        ];
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarDados();
+            renderizarTurmas();
+            renderizarAtividades();
+            atualizarEstatisticas();
+            atualizarSelectTurmas();
+            
+            // Data padrão
+            const amanha = new Date();
+            amanha.setDate(amanha.getDate() + 1);
+            amanha.setMinutes(amanha.getMinutes() - amanha.getTimezoneOffset());
+            const inputData = document.querySelector('input[name="deadline"]');
+            if (inputData) inputData.value = amanha.toISOString().slice(0, 16);
+        });
+
+        // LocalStorage
+        function salvarDados() {
+            localStorage.setItem('eduflow_fred', JSON.stringify({ turmas, atividades, entregas }));
+        }
+
+        function carregarDados() {
+            const salvos = localStorage.getItem('eduflow_fred');
+            if (salvos) {
+                const dados = JSON.parse(salvos);
+                turmas = dados.turmas || [];
+                atividades = dados.atividades || [];
+                entregas = dados.entregas || [];
+            }
+        }
+
+        function exportData() {
+            const dados = { turmas, atividades, entregas };
+            const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `eduflow_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            mostrarToast('Backup criado', 'Dados salvos com sucesso');
+        }
+
+        // Modos
+        function toggleMode() {
+            const toggle = document.getElementById('modeToggle');
+            const teacherView = document.getElementById('teacherView');
+            const studentView = document.getElementById('studentView');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            if (teacherView.style.display !== 'none') {
+                // Mudar para modo aluno
+                teacherView.style.display = 'none';
+                studentView.style.display = 'block';
+                sidebar.style.display = 'none';
+                mainContent.style.marginLeft = '0';
+                toggle.innerHTML = '<i class="fas fa-user-graduate"></i><span>MODO ALUNO</span>';
+                toggle.className = 'mode-toggle aluno';
+                
+                // Mostrar seleção de turma
+                document.getElementById('student-select-turma').style.display = 'block';
+                document.getElementById('student-select-aluno').style.display = 'none';
+                document.getElementById('student-dashboard').style.display = 'none';
+                renderizarTurmasParaAluno();
+            } else {
+                // Voltar para modo professor
+                teacherView.style.display = 'block';
+                studentView.style.display = 'none';
+                sidebar.style.display = 'flex';
+                mainContent.style.marginLeft = '280px';
+                toggle.innerHTML = '<i class="fas fa-chalkboard-teacher"></i><span>MODO PROFESSOR</span>';
+                toggle.className = 'mode-toggle professor';
+                alunoAtual = null;
+                turmaAtual = null;
+            }
+        }
+
+        // Gerenciamento de Turmas
+        function createTurma(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            const nomesAlunos = formData.get('alunos').split('\n').map(n => n.trim()).filter(n => n);
+            
+            const novaTurma = {
+                id: Date.now().toString(),
+                nome: formData.get('nome'),
+                cor: formData.get('cor'),
+                alunos: nomesAlunos.map((nome, idx) => ({
+                    id: idx,
+                    nome: nome,
+                    iniciais: nome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
+                }))
+            };
+            
+            turmas.push(novaTurma);
+            salvarDados();
+            
+            closeModal('turmaModal');
+            form.reset();
+            mostrarToast('Turma criada', `${novaTurma.nome} com ${novaTurma.alunos.length} alunos`);
+            renderizarTurmas();
+            atualizarEstatisticas();
+            atualizarSelectTurmas();
+        }
+
+        function renderizarTurmas() {
+            const container = document.getElementById('turmas-list');
+            const empty = document.getElementById('emptyTurmas');
+            
+            if (!container) return;
+            
+            if (turmas.length === 0) {
+                container.innerHTML = '';
+                if (empty) empty.style.display = 'block';
+                return;
+            }
+            
+            if (empty) empty.style.display = 'none';
+            container.innerHTML = '';
+            
+            turmas.forEach(turma => {
+                const html = `
+                    <div class="turma-card">
+                        <div class="turma-header">
+                            <div class="turma-title">
+                                <div class="class-color" style="background: ${turma.cor}; width: 16px; height: 16px;"></div>
+                                ${turma.nome}
+                                <span style="font-size: 12px; color: var(--text-secondary); font-weight: normal;">(${turma.alunos.length} alunos)</span>
+                            </div>
+                            <button class="btn btn-sm btn-danger" onclick="excluirTurma('${turma.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                            ${turma.alunos.map(aluno => `
+                                <div class="aluno-tag">
+                                    ${aluno.nome}
+                                    <button onclick="removerAluno('${turma.id}', ${aluno.id})"><i class="fas fa-times"></i></button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function excluirTurma(id) {
+            if (confirm('Deseja excluir esta turma e todos os seus dados?')) {
+                turmas = turmas.filter(t => t.id !== id);
+                atividades = atividades.filter(a => a.turmaId !== id);
+                entregas = entregas.filter(e => !turmas.find(t => t.id === e.turmaId));
+                salvarDados();
+                renderizarTurmas();
+                atualizarEstatisticas();
+                atualizarSelectTurmas();
+                mostrarToast('Turma excluída');
+            }
+        }
+
+        function removerAluno(turmaId, alunoId) {
+            const turma = turmas.find(t => t.id === turmaId);
+            if (turma) {
+                turma.alunos = turma.alunos.filter(a => a.id !== alunoId);
+                salvarDados();
+                renderizarTurmas();
+                mostrarToast('Aluno removido');
+            }
+        }
+
+        function atualizarSelectTurmas() {
+            const selects = document.querySelectorAll('select[name="class"], #classSelect');
+            selects.forEach(select => {
+                if (select) {
+                    select.innerHTML = '<option value="">Selecione...</option>';
+                    turmas.forEach(turma => {
+                        select.innerHTML += `<option value="${turma.id}">${turma.nome}</option>`;
+                    });
+                }
+            });
+        }
+
+        // Atividades
+        function createActivity(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            const turmaId = formData.get('class');
+            const turma = turmas.find(t => t.id === turmaId);
+            
+            if (!turma) {
+                mostrarToast('Erro', 'Selecione uma turma', 'error');
+                return;
+            }
+            
+            const novaAtividade = {
+                id: Date.now(),
+                titulo: formData.get('title'),
+                descricao: formData.get('description'),
+                tipo: formData.get('type'),
+                turmaId: turmaId,
+                turmaNome: turma.nome,
+                deadline: formData.get('deadline'),
+                pontos: parseInt(formData.get('points')) || 0,
+                criadaEm: new Date().toISOString()
+            };
+            
+            atividades.push(novaAtividade);
+            salvarDados();
+            
+            closeModal('activityModal');
+            form.reset();
+            mostrarToast('Atividade criada', `Publicada em ${turma.nome}`);
+            renderizarAtividades();
+            atualizarEstatisticas();
+            
+            // Resetar data
+            const amanha = new Date();
+            amanha.setDate(amanha.getDate() + 1);
+            amanha.setMinutes(amanha.getMinutes() - amanha.getTimezoneOffset());
+            form.querySelector('input[name="deadline"]').value = amanha.toISOString().slice(0, 16);
+        }
+
+        function renderizarAtividades() {
+            const container = document.getElementById('activities-list');
+            const empty = document.getElementById('emptyActivities');
+            
+            if (!container) return;
+            
+            if (atividades.length === 0) {
+                if (empty) empty.style.display = 'block';
+                return;
+            }
+            
+            if (empty) empty.style.display = 'none';
+            container.innerHTML = '';
+            
+            atividades.sort((a, b) => new Date(b.criadaEm) - new Date(a.criadaEm));
+            
+            atividades.forEach(atv => {
+                const turma = turmas.find(t => t.id === atv.turmaId);
+                const tipoClasse = atv.tipo === 'exam' ? 'type-exam' : (atv.tipo === 'material' ? 'type-material' : 'type-task');
+                const tipoTexto = atv.tipo === 'exam' ? 'Avaliação' : (atv.tipo === 'material' ? 'Material' : 'Prática');
+                
+                const html = `
+                    <div class="activity-item">
+                        <button class="delete-btn" onclick="excluirAtividade(${atv.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <div class="activity-header">
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <span class="activity-type ${tipoClasse}">${tipoTexto}</span>
+                                <span style="font-size: 12px; color: ${turma ? turma.cor : '#fff'}; font-weight: 600;">
+                                    <i class="fas fa-circle" style="font-size: 8px;"></i> ${turma ? turma.nome : 'Turma'}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="activity-title">${atv.titulo}</div>
+                        <div class="activity-desc">${atv.descricao || ''}</div>
+                        <div class="activity-footer">
+                            <div class="deadline">
+                                <i class="fas fa-clock"></i> ${atv.deadline ? formatarData(atv.deadline) : 'Sem prazo'}
+                            </div>
+                            <div>${atv.pontos > 0 ? `<i class="fas fa-star"></i> ${atv.pontos} pts` : ''}</div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function excluirAtividade(id) {
+            if (confirm('Excluir esta atividade?')) {
+                atividades = atividades.filter(a => a.id !== id);
+                entregas = entregas.filter(e => e.atividadeId !== id);
+                salvarDados();
+                renderizarAtividades();
+                atualizarEstatisticas();
+                mostrarToast('Atividade excluída');
+            }
+        }
+
+        // Visão do Aluno
+        function renderizarTurmasParaAluno() {
+            const container = document.getElementById('student-turmas-list');
+            if (!container) return;
+            
+            if (turmas.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Nenhuma turma cadastrada</p>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            turmas.forEach(turma => {
+                const html = `
+                    <div class="student-option" onclick="selecionarTurma('${turma.id}')">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="class-color" style="background: ${turma.cor}; width: 16px; height: 16px;"></div>
+                            <div>
+                                <div style="font-weight: 700;">${turma.nome}</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">${turma.alunos.length} alunos</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function selecionarTurma(turmaId) {
+            turmaAtual = turmas.find(t => t.id === turmaId);
+            if (!turmaAtual) return;
+            
+            document.getElementById('nomeTurmaSelecionada').textContent = turmaAtual.nome;
+            document.getElementById('student-select-turma').style.display = 'none';
+            document.getElementById('student-select-aluno').style.display = 'block';
+            
+            const container = document.getElementById('student-alunos-list');
+            container.innerHTML = '';
+            
+            turmaAtual.alunos.forEach(aluno => {
+                const html = `
+                    <div class="student-option" onclick="selecionarAluno(${aluno.id})">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="submission-avatar">${aluno.iniciais}</div>
+                            <div style="font-weight: 600;">${aluno.nome}</div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function voltarSelecaoTurma() {
+            document.getElementById('student-select-turma').style.display = 'block';
+            document.getElementById('student-select-aluno').style.display = 'none';
+            turmaAtual = null;
+        }
+
+        function selecionarAluno(alunoId) {
+            if (!turmaAtual) return;
+            alunoAtual = turmaAtual.alunos.find(a => a.id === alunoId);
+            if (!alunoAtual) return;
+            
+            document.getElementById('student-select-aluno').style.display = 'none';
+            document.getElementById('student-dashboard').style.display = 'block';
+            document.getElementById('studentNameDisplay').textContent = `${alunoAtual.nome} • ${turmaAtual.nome}`;
+            
+            renderizarAtividadesDoAluno();
+        }
+
+        function logoutStudent() {
+            alunoAtual = null;
+            turmaAtual = null;
+            document.getElementById('student-dashboard').style.display = 'none';
+            document.getElementById('student-select-turma').style.display = 'block';
+            renderizarTurmasParaAluno();
+        }
+
+        function renderizarAtividadesDoAluno() {
+            const container = document.getElementById('student-activities-container');
+            if (!container || !turmaAtual || !alunoAtual) return;
+            
+            const atividadesTurma = atividades.filter(a => a.turmaId === turmaAtual.id);
+            
+            if (atividadesTurma.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h3>Nenhuma atividade</h3>
+                        <p>Professor ainda não publicou atividades</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = '';
+            atividadesTurma.forEach(atv => {
+                const entrega = entregas.find(e => e.atividadeId === atv.id && e.alunoId === alunoAtual.id);
+                const nota = entrega ? entrega.nota : null;
+                
+                const html = `
+                    <div class="activity-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+                            <div>
+                                <span class="activity-type ${atv.tipo === 'exam' ? 'type-exam' : (atv.tipo === 'material' ? 'type-material' : 'type-task')}">
+                                    ${atv.tipo === 'exam' ? 'Avaliação' : (atv.tipo === 'material' ? 'Material' : 'Prática')}
+                                </span>
+                                <h3 style="font-size: 18px; margin: 8px 0 4px;">${atv.titulo}</h3>
+                                <p style="color: var(--text-secondary); font-size: 13px;">${atv.descricao || ''}</p>
+                            </div>
+                            ${nota !== null ? `
+                                <div class="nota-badge">${nota.toFixed(1)}</div>
+                            ` : entrega ? `
+                                <div class="entregue-badge"><i class="fas fa-check"></i> Enviado</div>
+                            ` : ''}
+                        </div>
+                        
+                        <div style="display: flex; gap: 16px; font-size: 12px; color: var(--text-secondary); margin-bottom: 16px;">
+                            <span><i class="fas fa-clock"></i> ${atv.deadline ? formatarData(atv.deadline) : 'Sem prazo'}</span>
+                            <span><i class="fas fa-star"></i> ${atv.pontos} pontos</span>
+                        </div>
+                        
+                        ${!entrega ? `
+                            <button class="btn btn-primary" style="width: 100%;" onclick="abrirEntrega(${atv.id})">
+                                <i class="fas fa-upload"></i> Entregar Atividade
+                            </button>
+                        ` : nota !== null ? `
+                            <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; font-size: 13px;">
+                                <strong>Feedback:</strong> ${entrega.feedback || 'Nenhum comentário ainda'}
+                            </div>
+                        ` : `
+                            <div style="text-align: center; color: var(--text-secondary); font-size: 13px; padding: 12px;">
+                                <i class="fas fa-hourglass-half"></i> Aguardando correção do professor
+                            </div>
+                        `}
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function abrirEntrega(atividadeId) {
+            atividadeParaEntregar = atividades.find(a => a.id === atividadeId);
+            if (!atividadeParaEntregar) return;
+            
+            document.getElementById('submitActivityTitle').textContent = atividadeParaEntregar.titulo;
+            document.getElementById('submitActivityDeadline').textContent = atividadeParaEntregar.deadline ? 
+                new Date(atividadeParaEntregar.deadline).toLocaleString('pt-BR') : 'Sem prazo';
+            
+            document.getElementById('uploadStatus').style.display = 'none';
+            document.getElementById('studentComment').value = '';
+            
+            openModal('submitModal');
+        }
+
+        function simulateUpload() {
+            document.getElementById('uploadStatus').style.display = 'block';
+            mostrarToast('Arquivo anexado', 'Vídeo/foto selecionado');
+        }
+
+        function confirmSubmission() {
+            if (!atividadeParaEntregar || !alunoAtual || !turmaAtual) return;
+            
+            const novaEntrega = {
+                id: Date.now(),
+                alunoId: alunoAtual.id,
+                alunoNome: alunoAtual.nome,
+                turmaId: turmaAtual.id,
+                atividadeId: atividadeParaEntregar.id,
+                comentario: document.getElementById('studentComment').value,
+                data: new Date().toISOString(),
+                nota: null,
+                feedback: ''
+            };
+            
+            entregas.push(novaEntrega);
+            salvarDados();
+            
+            closeModal('submitModal');
+            mostrarToast('Enviado!', 'Atividade entregue com sucesso');
+            renderizarAtividadesDoAluno();
+        }
+
+        // Correções (Professor)
+        function renderizarSubmissoes() {
+            const container = document.getElementById('submissions-list');
+            const empty = document.getElementById('emptySubmissions');
+            
+            if (!container) return;
+            
+            const pendentes = entregas.filter(e => e.nota === null);
+            
+            if (pendentes.length === 0) {
+                if (empty) empty.style.display = 'block';
+                return;
+            }
+            
+            if (empty) empty.style.display = 'none';
+            container.innerHTML = '';
+            
+            pendentes.forEach(ent => {
+                const atv = atividades.find(a => a.id === ent.atividadeId);
+                const turma = turmas.find(t => t.id === ent.turmaId);
+                const aluno = turma ? turma.alunos.find(a => a.id === ent.alunoId) : null;
+                
+                const html = `
+                    <div class="submission-item">
+                        <div class="submission-avatar">${aluno ? aluno.iniciais : 'AL'}</div>
+                        <div class="submission-info">
+                            <div class="submission-name">${aluno ? aluno.nome : 'Aluno'}</div>
+                            <div class="submission-activity">${atv ? atv.titulo : 'Atividade'} • ${turma ? turma.nome : ''}</div>
+                        </div>
+                        <button class="btn btn-sm btn-primary" onclick="corrigirEntrega(${ent.id})">Corrigir</button>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        function corrigirEntrega(entregaId) {
+            // Simplificado: apenas marca como corrigido com nota 8 por exemplo
+            // Na prática, abriria um modal para digitar a nota
+            const entrega = entregas.find(e => e.id === entregaId);
+            if (entrega) {
+                const nota = prompt('Digite a nota (0-10):', '8.0');
+                if (nota !== null) {
+                    entrega.nota = parseFloat(nota);
+                    entrega.feedback = prompt('Feedback:', 'Bom trabalho!');
+                    salvarDados();
+                    renderizarSubmissoes();
+                    mostrarToast('Corrigido', 'Nota salva');
+                }
+            }
+        }
+
+        // Utilitários
+        function formatarData(dataString) {
+            const data = new Date(dataString);
+            const agora = new Date();
+            const diff = data - agora;
+            const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+            
+            if (dias < 0) return 'Atrasado';
+            if (dias === 0) return 'Vence hoje';
+            if (dias === 1) return 'Vence amanhã';
+            return `Vence em ${dias} dias`;
+        }
+
+        function atualizarEstatisticas() {
+            const statTurmas = document.getElementById('statTurmas');
+            const statAlunos = document.getElementById('statAlunos');
+            const statAtiv = document.getElementById('statActivities');
+            
+            if (statTurmas) statTurmas.textContent = turmas.length;
+            if (statAlunos) statAlunos.textContent = turmas.reduce((acc, t) => acc + t.alunos.length, 0);
+            if (statAtiv) statAtiv.textContent = atividades.length;
+        }
+
+        // Navegação
+        function showSection(section) {
+            // Esconder todas
+            document.querySelectorAll('.section-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            
+            // Mostrar a selecionada
+            const target = document.getElementById(section + '-section');
+            if (target) target.style.display = 'block';
+            
+            // Ativar menu
+            if (event && event.target) {
+                event.target.closest('.nav-item').classList.add('active');
+            }
+            
+            // Renderizar conteúdo específico
+            if (section === 'classes') renderizarTurmas();
+            if (section === 'submissions') renderizarSubmissoes();
+        }
+
+        // Modais
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('active');
+        }
+
+        function mostrarToast(titulo, mensagem, tipo = 'success') {
+            const toast = document.getElementById('toast');
+            const icon = toast.querySelector('.toast-icon');
+            
+            document.getElementById('toast-title').textContent = titulo;
+            document.getElementById('toast-message').textContent = mensagem;
+            
+            if (tipo === 'error') {
+                toast.classList.add('error');
+                icon.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
+            } else {
+                toast.classList.remove('error');
+                icon.innerHTML = '<i class="fas fa-check"></i>';
+            }
+            
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Globais
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.createTurma = createTurma;
+        window.createActivity = createActivity;
+        window.excluirTurma = excluirTurma;
+        window.excluirAtividade = excluirAtividade;
+        window.removerAluno = removerAluno;
+        window.showSection = showSection;
+        window.toggleMode = toggleMode;
+        window.selecionarTurma = selecionarTurma;
+        window.selecionarAluno = selecionarAluno;
+        window.voltarSelecaoTurma = voltarSelecaoTurma;
+        window.logoutStudent = logoutStudent;
+        window.abrirEntrega = abrirEntrega;
+        window.simulateUpload = simulateUpload;
+        window.confirmSubmission = confirmSubmission;
+        window.corrigirEntrega = corrigirEntrega;
+        window.exportData = exportData;
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
